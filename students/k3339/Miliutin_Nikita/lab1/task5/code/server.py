@@ -9,7 +9,7 @@ class MyHTTPServer:
         self.name = name
         self.host = host
         self.port = port
-        self.grades = []
+        self.grades = {}
   
     def serve_forever(self):
         # 1. Запуск сервера на сокете, обработка входящих соединений
@@ -70,7 +70,10 @@ class MyHTTPServer:
 
             # --- здесь добавляем в нашу "базу" ---
             if discipline and grade:
-                self.grades.append({'discipline': discipline, 'grade': grade})
+                if discipline not in self.grades.keys():
+                    self.grades[discipline] = [grade]
+                else:
+                    self.grades[discipline].append(grade)
                 response_headers = (
                     f"{version} 200 OK\r\n"
                     "\r\n"
@@ -80,8 +83,8 @@ class MyHTTPServer:
         elif method == "GET":
             # --- формируем HTML таблицу на основе self.grades ---
             rows = "".join(
-                f"<tr><td>{g['discipline']}</td><td>{g['grade']}</td></tr>"
-                for g in self.grades
+                f"<tr><td>{g}</td><td>{self.grades[g]}</td></tr>"
+                for g in self.grades.keys()
             )
 
             html = f"""

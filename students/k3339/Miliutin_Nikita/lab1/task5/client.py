@@ -37,7 +37,16 @@ post_template = (
 
 # --- список записей для добавления ---
 grades_to_add = [
-    ("Math", "5")
+    ("Math", "5"),
+    ("Physics", "4"),
+    ("Programming", "A"),
+    ("History", "B"),
+    ("English", "C"),
+    ("Databases", "90"),
+    ("Networking", "Passed"),
+    ("Algorithms", "Excellent"),
+    ("PE", "OK"),
+    ("Art", "A+")
 ]
 
 # --- добавляем все записи ---
